@@ -1,0 +1,19 @@
+{
+  "name": "es-hello-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "node ./esindex.js"
+  },
+  "bin": {
+    "es-hello": "./bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concat-stream": "^2.0.0",
+    "inquirer": "^8.1.5"
+  }
+}
