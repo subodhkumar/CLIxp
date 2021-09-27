@@ -46,7 +46,7 @@ const executeCLIwithInput = (cmd, inputs = []) => {
 };
 
 
-executeCLIwithInput('hello',['S','K','9123456789']).then((res)=>{
+executeCLIwithInput('es-hello',['S','K','9123456789']).then((res)=>{
     console.log(res)
 }).catch(err=>{
     console.error(err)
