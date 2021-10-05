@@ -2,10 +2,10 @@ const { spawn } = require("child_process");
 const concat = require("concat-stream");
 
 
-const executeCLIwithInput = (cmd, inputs = []) => {
+const executeCLIwithInput = (cmd,cmdArgs=[], inputArgs=[]) => {
   return new Promise((resolve, reject) => {
     const ENTER = "\x0D";
-    const childProc = spawn(cmd);
+    const childProc = spawn(cmd, cmdArgs);
     childProc.stdin.setEncoding("utf-8");
     childProc.stderr.once('error',(err) => {
       childProc.stdin.end();
@@ -23,7 +23,7 @@ const executeCLIwithInput = (cmd, inputs = []) => {
       curTimeout && clearTimeout(curTimeout);
       curTimeout = setTimeout(() => {
         childProc.stdin.write(ENTER);
-        passInput(inputs);
+        passInput(inputsArgs);
       }, timeout);
     };
     const passParam = (param) => {
@@ -33,20 +33,22 @@ const executeCLIwithInput = (cmd, inputs = []) => {
         passEndOfParam();
       }, timeout);
     };
-    const passInput = (inputs) => {
-      if (inputs.length) {
-        const param = inputs.shift();
+    const passInput = (inputsArgs) => {
+      if (inputsArgs.length) {
+        const param = inputsArgs.shift();
         passParam(param);
       } else {
         childProc.stdin.end();
       }
     };
-    passInput(inputs);
+    passInput(inputsArgs);
   });
 };
 
-
-executeCLIwithInput('es-hello',['S','K','9123456789']).then((res)=>{
+const cmd='t';
+const cmdArgs=['c'];
+const inputArgs = [];
+executeCLIwithInput(cmd,cmdArgs, inputArgs).then((res)=>{
     console.log(res)
 }).catch(err=>{
     console.error(err)
